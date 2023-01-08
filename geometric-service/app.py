@@ -37,8 +37,8 @@ def cut():
         # Parse the request payload
         data = request.get_json()
         # Extract the polygon and plane data from the payload
-        polygon = Polygon(data['polygon']['vertices'])
-        plane = Plane(data['plane']['point'], data['plane']['normal'])
+        polygon = Polygon(data['polygon']['vertices'])  # TODO check correctness of user input
+        plane = Plane(data['plane']['point'], data['plane']['normal'])  # TODO check correctness of user input
         cut_p = polygon.cut(plane)
         # Return the cut polygon as a response
         return cut_p.serialize()
