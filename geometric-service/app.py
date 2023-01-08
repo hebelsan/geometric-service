@@ -5,6 +5,9 @@ from shapes.polygon import Polygon
 
 app = Flask(__name__)
 
+HTTP_NO_PROCESSABLE_ENTITY = 422
+HTTP_CRITICAL = 500
+
 
 @app.route('/cut', methods=['POST'])
 def cut():
@@ -38,9 +41,11 @@ def cut():
         plane = Plane(data['plane']['point'], data['plane']['normal'])
         cut_p = polygon.cut(plane)
         # Return the cut polygon as a response
-        return jsonify({'cut': cut_p.vertices.tolist()})
+        return cut_p.serialize()
+    except ValueError as val_err:
+        return jsonify({'error': str(val_err)}), HTTP_NO_PROCESSABLE_ENTITY
     except Exception as err:
-        return jsonify({'error': str(err)})
+        return jsonify({'error': str(err)}), HTTP_CRITICAL
 
 
 if __name__ == '__main__':
