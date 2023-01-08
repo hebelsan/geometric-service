@@ -3,10 +3,10 @@ from flask import Flask, request, jsonify
 from shapes.plane import Plane
 from shapes.polygon import Polygon
 
-app = Flask(__name__)
-
 HTTP_NO_PROCESSABLE_ENTITY = 422
 HTTP_CRITICAL = 500
+
+app = Flask(__name__)
 
 
 @app.route('/cut', methods=['POST'])
