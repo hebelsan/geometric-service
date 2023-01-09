@@ -1,9 +1,13 @@
-FROM python:3.8-alpine
+FROM python:3.8-slim-buster
+
+ENV ALPHA true
 
 WORKDIR /app
 
-COPY Makefile geometric-service .
+COPY geometric-service .
 
-RUN make release
+RUN pip install -r requirements.txt
+
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "wsgi:app"]
 
 EXPOSE 5000

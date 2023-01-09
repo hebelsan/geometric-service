@@ -1,8 +1,8 @@
 ALPHA ?= true
-FLASK_APP ?= app.py
 HOST ?= localhost
 PORT ?= 5000
 SYSTEM_PYTHON ?= python3
+FLASK_APP ?= app.py
 
 VENV = venv
 PYTHON = $(VENV)/bin/python3
